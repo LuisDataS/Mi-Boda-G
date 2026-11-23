@@ -654,39 +654,52 @@
       </section>
 
       <!-- Sección Ubicación -->
-      <section style="margin-top: 28px; padding-top: 22px; border-top: 1px solid #dcd4c6;">
-        <p class="subtitulo" style="margin-bottom: 6px;">Ubicación</p>
-        <p style="font-size: 16px; color: #2c3531; margin-bottom: 12px;">
-          <strong>Finca Hotel Santa Sofía</strong><br>
-          <span style="font-size: 14px; color: #555;">Las camelias, Dosquebradas, Risaralda</span>
-        </p>
+<section id="mapa-boda" style="margin-top: 28px; padding-top: 22px; border-top: 1px solid #dcd4c6;">
+  <p class="subtitulo" style="margin-bottom: 6px;">Ubicación</p>
+  <p style="font-size: 16px; color: #2c3531; margin-bottom: 12px;">
+    <strong>Finca Hotel Santa Sofía</strong><br>
+    <span style="font-size: 14px; color: #555;">Las Camelias, Dosquebradas, Risaralda</span>
+  </p>
 
-        <a id="enlaceVerMapa" href="#mapa-boda" onclick="alternarMapaBoda(event)" style="
-          display: inline-block;
-          color: #2f5d46;
-          font-size: 14px;
-          text-decoration: underline;
-          margin-bottom: 12px;
-          cursor: pointer;">
-          Ver mapa interactivo
-        </a>
+  <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-bottom: 12px;">
+    <a id="enlaceVerMapa" href="#mapa-boda" onclick="alternarMapaBoda(event)" style="
+      display: inline-block;
+      color: #2f5d46;
+      font-size: 14px;
+      text-decoration: underline;
+      cursor: pointer;">
+      Ver mapa interactivo
+    </a>
 
-        <div id="contenedorMapaBoda" style="
-          display: none;
-          border-radius: 14px;
-          overflow: hidden;
-          border: 1px solid #d8d0c0;
-          margin-top: 6px;">
-          <iframe
-            id="iframeMapaBoda"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d327.0966360751308!2d-75.70564778379044!3d4.83317042444017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38812c01df66ed%3A0xe9f6822cd94a4e90!2sSanta%20Sof%C3%ADa!5e1!3m2!1ses!2sco!4v1795117154590!5m2!1ses!2sco"
-            width="100%"
-            height="220"
-            style="border:0; display:block;"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-      </section>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=4.8331704,-75.7056478"
+       target="_blank"
+       rel="noopener noreferrer"
+       style="
+         display: inline-block;
+         color: #2f5d46;
+         font-size: 14px;
+         font-weight: 600;
+         text-decoration: underline;">
+      Ver ruta en Google Maps
+    </a>
+  </div>
+
+  <div id="contenedorMapaBoda" style="
+    display: none;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #d8d0c0;
+    margin-top: 6px;">
+    <iframe
+      id="iframeMapaBoda"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d327.0966360751308!2d-75.70564778379044!3d4.83317042444017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38812c01df66ed%3A0xe9f6822cd94a4e90!2sSanta%20Sof%C3%ADa!5e1!3m2!1ses!2sco!4v1795117154590!5m2!1ses!2sco"
+      width="100%"
+      height="320"
+      style="border:0; display:block;"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
 
       <!-- Sección Foto -->
       
