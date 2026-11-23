@@ -1,1 +1,1221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuestra Boda</title>
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #2f5d46;
+      font-family: 'Georgia', serif;
+      color: #2c3531;
+      display: flex;
+      justify-content: center;
+      padding: 24px 14px 80px;
+      min-height: 100vh;
+    }
 
+.encabezado-floral {
+      flex: 0 0 100%;
+      max-width: 100%;
+      grid-column: 1 / -1;
+      margin: 0;
+      width: 100%;
+      background-color: #f7f4ed;
+      background-image: url('./img/flores-top.png');
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-size: 100% auto; /* Ocupa de lado a lado sin cortarse */
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+      overflow: hidden;
+      padding: 138px 18px 10px;
+      border-bottom: 1px solid #e4dccb;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .encabezado-floral .subtitulo {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.35;
+      color: #2f5d46;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+        
+    .tarjeta {
+      background-color: #f7f4ed;
+      width: 100%;
+      max-width: 480px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      border: 1px solid #d8d0c0;
+    }
+    .contenido-tarjeta {
+      padding-top: 12px; /* Evita un salto enorme antes del siguiente bloque */
+    }
+    .subtitulo {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #4e5e55;
+      margin-bottom: 10px;
+    }
+
+  /* Foto 3 al inicio con marco limpio y línea decorativa (sin desvanecido) */
+    .marco-portada {
+      width: 100%;
+      max-width: 340px;
+      margin: 12px auto 18px;
+      padding: 6px;
+      background-color: #f7f4ed;
+      border: 1px solid #c9bfa9;
+      border-radius: 18px;
+      box-shadow: 0 6px 16px rgba(44, 53, 49, 0.12);
+      overflow: hidden;
+    }
+    .foto-portada-desvanecida {
+      width: 100%;
+      max-width: 100%;
+      max-height: 240px;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 13px;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    /* Nombres dentro de una cinta elegante con letras en verde oscuro */
+    .cinta-nombres-wrap {
+      position: relative;
+      margin-top: 10px; /* Acerca los nombres al bloque anterior */
+      margin-bottom: 14px;
+      max-width: 360px;
+      padding: 6px 12px;
+    }
+    .cinta-principal {
+      position: relative;
+      background-color: #ece6d8;
+      border-top: 1.5px solid #c5b9a2;
+      border-bottom: 1.5px solid #c5b9a2;
+      border-radius: 10px;
+      padding: 14px 18px;
+      box-shadow: 0 6px 16px rgba(47, 93, 70, 0.12);
+    }
+    .cinta-principal::before,
+    .cinta-principal::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 70%;
+      background-color: #dcd3c0;
+      border: 1px solid #c5b9a2;
+      border-radius: 3px;
+    }
+    .cinta-principal::before {
+      left: -6px;
+    }
+    .cinta-principal::after {
+      right: -6px;
+    }
+    .nombres-cinta-texto {
+      color: #2f5d46;
+      line-height: 1.15;
+      text-align: center;
+    }
+    .nombres-cinta-texto .nombre-pareja {
+      font-size: 25px;
+      font-weight: normal;
+      color: #2f5d46;
+      display: block;
+    }
+    .nombres-cinta-texto .y-pareja {
+      font-size: 20px;
+      color: #557a67;
+      display: block;
+      margin: 3px 0;
+    }
+
+    /* Mensaje de los novios después del corazón */
+    .carta-novios {
+      text-align: left;
+      font-size: 14.5px;
+      line-height: 1.62;
+      color: #35403b;
+      padding: 16px 16px 14px;
+      background-color: #efebe1;
+      border-left: 3px solid #2f5d46;
+      border-radius: 12px;
+    }
+    .carta-novios p {
+      margin-bottom: 11px;
+    }
+    .carta-novios .firma-novios {
+      margin-top: 14px;
+      margin-bottom: 12px;
+      color: #2f5d46;
+      font-style: italic;
+    }
+    .carta-novios .frase-cierre-novios {
+      margin-bottom: 0;
+      padding-top: 10px;
+      border-top: 1px solid #dcd4c6;
+      font-size: 13.5px;
+      text-align: center;
+      color: #4a5550;
+      font-style: italic;
+    }
+
+
+
+    /* Contador amplio con días, horas y minutos */
+    .contador-boda {
+      background-color: #efebe1;
+      border: 1px solid #d8d0c0;
+      border-radius: 16px;
+      padding: 18px 14px;
+      margin-top: 20px;
+      margin-bottom: 24px;
+    }
+    .contador-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .bloque-tiempo {
+      background-color: #f7f4ed;
+      border: 1px solid #dfd7c6;
+      border-radius: 12px;
+      padding: 10px 6px;
+    }
+    .bloque-tiempo .valor-tiempo {
+      font-size: 32px;
+      line-height: 1.05;
+      color: #2f5d46;
+      display: block;
+    }
+    .bloque-tiempo .etiqueta-tiempo {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #6b7c72;
+      margin-top: 4px;
+      display: block;
+    }
+    .contador-texto {
+      font-size: 14px;
+      color: #4a5550;
+      margin-top: 10px;
+    }
+
+    .btn-musica {
+      background-color: #2f5d46;
+      color: #f7f4ed;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-family: 'Georgia', serif;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(47, 93, 70, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s;
+    }
+    .btn-musica:active { transform: scale(0.97); }
+
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .item-foto {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .galeria-grid img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: zoom-in;
+      border: 1px solid #d8d0c0;
+      display: block;
+    }
+    .pie-foto {
+      font-size: 12px;
+      color: #4f5d55;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .visor-zoom {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.88);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 18px;
+    }
+    .visor-zoom.activo {
+      display: flex;
+    }
+    .visor-contenido {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      max-width: 95vw;
+    }
+    .visor-zoom img {
+      max-width: 95vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      cursor: zoom-out;
+    }
+    .visor-descripcion {
+      color: #f7f4ed;
+      font-size: 14px;
+      text-align: center;
+      max-width: 600px;
+    }
+    .cerrar-zoom {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      background: #f7f4ed;
+      color: #2c3531;
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Style para el Formulario de Google Sheets */
+    .form-boda {
+      margin-top: 12px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .campo-boda label {
+      display: block;
+      font-size: 13px;
+      color: #2c3531;
+      margin-bottom: 4px;
+    }
+    .campo-boda input,
+    .campo-boda select,
+    .campo-boda textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #c9bfa9;
+      background-color: #ffffff;
+      font-family: 'Georgia', serif;
+      font-size: 14px;
+      color: #2c3531;
+    }
+    .btn-enviar-boda {
+      background-color: #2f5d46;
+      color: #f7f4ed;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-family: 'Georgia', serif;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+    .btn-enviar-boda:disabled {
+      background-color: #8b9a92;
+      cursor: not-allowed;
+    }
+    .estado-envio {
+      font-size: 13px;
+      margin-top: 8px;
+      min-height: 18px;
+    }
+    .aviso-cierre-rsvp {
+      background-color: #f5eceb;
+      border: 1px solid #dfb8b5;
+      color: #8f2d2b;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* Pie de página en verde más oscuro */
+    .pie-creador {
+      background-color: #1e4231;
+      color: #e8f0ec;
+      padding: 20px 22px;
+      font-size: 12px;
+      line-height: 1.55;
+      border-top: 1px solid #163225;
+    }
+    .pie-creador a {
+      color: #c8e6d7;
+      text-decoration: underline;
+    }
+
+    /* Botón flotante para indicar que sigue contenido hacia abajo */
+    .btn-bajar-flotante {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 900;
+      background-color: #2f5d46;
+      color: #f7f4ed;
+      border: 1px solid #e4decb;
+      border-radius: 999px;
+      padding: 10px 15px;
+      font-family: 'Georgia', serif;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .btn-bajar-flotante:hover {
+      transform: translateY(-2px);
+    }
+    .btn-bajar-flotante.oculto {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Sección Itinerario */
+    .itinerario-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+      text-align: left;
+    }
+    .itinerario-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background-color: #efebe1;
+      border: 1px solid #dcd4c6;
+      border-radius: 14px;
+      padding: 10px 14px;
+    }
+    .itinerario-icono {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      border-radius: 50%;
+      background-color: #f7f4ed;
+      border: 1px solid #c9bfa9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2f5d46;
+    }
+    .itinerario-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 8px;
+    }
+    .itinerario-evento {
+      font-size: 14.5px;
+      color: #2c3531;
+      font-weight: bold;
+    }
+    .itinerario-hora {
+      font-size: 13.5px;
+      color: #2f5d46;
+      white-space: nowrap;
+    }
+
+    /* Sección Vestimenta y Lluvia de Sobres */
+    .caja-vestimenta {
+      background-color: #efebe1;
+      border: 1px solid #dcd4c6;
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 10px;
+      text-align: left;
+    }
+    .grupo-vestimenta {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #d3c9b7;
+    }
+    .grupo-vestimenta:first-of-type {
+      margin-top: 6px;
+      padding-top: 0;
+      border-top: none;
+    }
+    .titulo-grupo-vestimenta {
+      font-size: 13.5px;
+      color: #2c3531;
+      margin-bottom: 6px;
+    }
+    .paleta-colores {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .muestra-color {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.14);
+      display: inline-block;
+    }
+    .caja-lluvia-sobres {
+      margin-top: 14px;
+      background-color: #f5efe6;
+      border: 1px solid #d8cbb8;
+      border-radius: 14px;
+      padding: 16px 14px;
+      text-align: center;
+    }
+    .titulo-lluvia {
+      font-size: 20px;
+      color: #2f5d46;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+    .texto-lluvia {
+      font-size: 13.5px;
+      color: #4a5550;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    /* Espacio exterior a izquierda y derecha para todas las secciones */
+    section {
+      margin-left: 16px;
+      margin-right: 16px;
+      box-sizing: border-box;
+    }
+
+    seccion-confirmacion {
+      margin-bottom: 20px;    /* Lo separa de la última sección de arriba */
+    }
+
+    btn-musica {
+      margin-top: 25px;      /* Lo separa de la última sección de arriba */
+    }
+    
+    footer {
+      margin-top: 15px;      /* Lo separa de la última sección de arriba */
+    }
+
+    /* En computador: aún más aire lateral */
+    @media (min-width: 601px) {
+      section {
+        margin-left: 32px;
+        margin-right: 32px;
+      }
+    }
+
+    @media (min-width: 601px) {
+      .encabezado-floral {
+        padding-top: 165px; /* Súbelo a 175px o 185px si quieres aún más espacio */
+      }
+      .cinta-nombres-wrap {
+        max-width: 380px; /* Ajusta a 480px o 100% si la quieres aún más ancha */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+      }
+      .cinta-nombres-wrap .cinta-nombres,
+      .cinta-nombres-wrap > div {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .encabezado-floral {
+        padding: 130px 14px 8px;
+      }
+      .encabezado-floral .subtitulo {
+        font-size: 18px;
+        margin-top: 4px;
+      }
+      .contenido-tarjeta {
+        padding-top: 10px;
+      }
+      .cinta-nombres-wrap {
+        margin-top: 10px;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+
+  <main class="tarjeta">
+    <!-- Encabezado superior con flores reales -->
+    <header class="encabezado-floral">
+      <div class="marco-dorado-superior">
+        <p class="subtitulo">¡Te invitamos a nuestra Boda!</p>
+      </div>
+    </header>
+
+    <div class="contenido-tarjeta">
+
+      <!-- Nombres dentro de una cinta con letras en verde oscuro -->
+      <div class="cinta-nombres-wrap" aria-label="Sandra Isabel y Luis Hernán">
+        <div class="cinta-principal">
+          <div class="nombres-cinta-texto">
+            <span class="nombre-pareja">Sandra Isabel</span>
+            <span class="y-pareja">&amp;</span>
+            <span class="nombre-pareja">Luis Hernán</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Foto 6 Civil y Foto 8 Iglesia al inicio -->
+      <div class="marco-portada">
+            <img src="./img/Foto6.jpeg" alt="Foto 6" class="foto-portada-desvanecida" onclick="abrirZoom(this.src, this.alt, 'El amor no es solamente encontrarse, es elegir caminar juntos cada día.')">
+            <p class="pie-foto">El amor no es solamente encontrarse, es elegir caminar juntos cada día.</p>
+      </div>
+
+      <!-- Foto anillos -->
+      <div class="marco-portada">
+        <img src="./img/AnillosN.jpeg" alt="Nuestros anillos" class="foto-portada-desvanecida" onclick="abrirZoom(this.src, this.alt, 'Nuestros anillos')">
+      </div>
+
+      <!-- Mensaje de los novios después del corazón -->
+      <section class="carta-novios" aria-label="Mensaje de los novios">
+        <p>Con el corazón lleno de amor y gratitud a Dios, queremos compartir contigo una de las decisiones más bonitas de nuestras vidas.</p>
+
+        <p>Hemos decidido unir nuestros caminos y sellar ante Dios y la vida nuestro compromiso de acompañarnos en este maravilloso viaje llamado matrimonio.</p>
+
+        <p>Un viaje en el que elegimos caminar juntos, construir sueños, compartir alegrías, superar dificultades y cultivar cada día el amor, la paz, el respeto, la ternura y la complicidad.</p>
+
+        <p>Queremos que hagas parte de este día tan especial, en el que celebraremos nuestra unión y el comienzo de una nueva historia juntos.</p>
+
+        <p class="firma-novios">
+          Con cariño,<br>
+          <strong>Sandra Isabel y Luis Hernán 🤍</strong>
+        </p>
+      </section>
+
+
+      <!-- Contador con días, horas y minutos -->
+      <section class="contador-boda" aria-live="polite">
+        <p class="subtitulo" style="margin-bottom: 2px;">Cuenta regresiva</p>
+          <p class="fecha">Sábado 19 de Diciembre 2026</p>
+        <div class="contador-grid">
+          <div class="bloque-tiempo">
+            <span id="diasBoda" class="valor-tiempo">--</span>
+            <span class="etiqueta-tiempo">Días</span>
+          </div>
+          <div class="bloque-tiempo">
+            <span id="horasBoda" class="valor-tiempo">--</span>
+            <span class="etiqueta-tiempo">Horas</span>
+          </div>
+          <div class="bloque-tiempo">
+            <span id="minutosBoda" class="valor-tiempo">--</span>
+            <span class="etiqueta-tiempo">Minutos</span>
+          </div>
+        </div>
+        <p id="textoDiasBoda" class="contador-texto">para nuestra boda</p>
+      </section>
+
+      <!-- Sección Ubicación -->
+      <section style="margin-top: 28px; padding-top: 22px; border-top: 1px solid #dcd4c6;">
+        <p class="subtitulo" style="margin-bottom: 6px;">Ubicación</p>
+        <p style="font-size: 16px; color: #2c3531; margin-bottom: 12px;">
+          <strong>Finca Hotel Santa Sofía</strong><br>
+          <span style="font-size: 14px; color: #555;">Las camelias, Dosquebradas, Risaralda</span>
+        </p>
+
+        <a id="enlaceVerMapa" href="#mapa-boda" onclick="alternarMapaBoda(event)" style="
+          display: inline-block;
+          color: #2f5d46;
+          font-size: 14px;
+          text-decoration: underline;
+          margin-bottom: 12px;
+          cursor: pointer;">
+          Ver mapa interactivo
+        </a>
+
+        <div id="contenedorMapaBoda" style="
+          display: none;
+          border-radius: 14px;
+          overflow: hidden;
+          border: 1px solid #d8d0c0;
+          margin-top: 6px;">
+          <iframe
+            id="iframeMapaBoda"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d327.0966360751308!2d-75.70564778379044!3d4.83317042444017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38812c01df66ed%3A0xe9f6822cd94a4e90!2sSanta%20Sof%C3%ADa!5e1!3m2!1ses!2sco!4v1795117154590!5m2!1ses!2sco"
+            width="100%"
+            height="220"
+            style="border:0; display:block;"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </section>
+
+      <!-- Sección Foto -->
+      
+    <!-- Sección Itinerario -->
+      <section style="margin-top: 28px; padding-top: 22px; border-top: 1px solid #dcd4c6;">
+        <p class="subtitulo" style="margin-bottom: 4px;">Itinerario</p>
+        <p style="font-size: 13px; color: #666; margin-bottom: 6px;"></p>
+
+        <div class="itinerario-lista">
+          <div class="itinerario-item">
+            <div class="itinerario-icono" aria-hidden="true">🚗</div>
+            <div class="itinerario-info">
+              <span class="itinerario-evento">LLega de invitados a la finca</span>
+              <span class="itinerario-hora">2:30 pm</span>
+            </div>
+          </div>
+
+          <div class="itinerario-item">
+            <div class="itinerario-icono" aria-hidden="true">💍</div>
+            <div class="itinerario-info">
+              <span class="itinerario-evento">Ceremonia Civil</span>
+              <span class="itinerario-hora">3:00 pm</span>
+            </div>
+          </div>
+
+          <div class="itinerario-item">
+            <div class="itinerario-icono" aria-hidden="true">📸</div>
+            <div class="itinerario-info">
+              <span class="itinerario-evento">Sección fotografica</span>
+              <span class="itinerario-hora">4:15 pm</span>
+            </div>
+          </div>
+          
+          <div class="itinerario-item">
+            <div class="itinerario-icono" aria-hidden="true">🍽️</div>
+            <div class="itinerario-info">
+              <span class="itinerario-evento">Recepción</span>
+              <span class="itinerario-hora">5:30 pm</span>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- Sección Vestimenta y Lluvia de Sobres -->
+      <section style="margin-top: 28px; padding-top: 22px; border-top: 1px solid #dcd4c6;">
+        <p class="subtitulo" style="margin-bottom: 4px;">Protocolo de vestuario</p>
+        <p style="font-size: 13px; color: #666; margin-bottom: 6px;">Vestimenta formal, respetando los colores blanco, beige, negro y azul oscuro para los novios</p>
+
+        <div class="caja-vestimenta">
+          <div class="grupo-vestimenta">
+            <p class="titulo-grupo-vestimenta"><strong>Ellas:</strong></p>
+            <p class="titulo-grupo-vestimenta"> Colores pasteles, vestido largo, calzado cómodo</p>
+            <div class="paleta-colores" aria-label="Colores pasteles sugeridos para damas">
+              <span class="muestra-color" style="background-color: #a8d5ba;" title="Verde pastel"></span>
+              <span class="muestra-color" style="background-color: #fce89c;" title="Amarillo pastel"></span>
+              <span class="muestra-color" style="background-color: #d8b4e2;" title="Lila pastel"></span>
+              <span class="muestra-color" style="background-color: #f8bBD0;" title="Rosa pastel"></span>
+            </div>
+          </div>
+
+          <div class="grupo-vestimenta">
+            <p class="titulo-grupo-vestimenta"><strong>Ellos:</strong></p>
+            <p class="titulo-grupo-vestimenta">Colores neutros</p>
+            <div class="paleta-colores" aria-label="Colores neutros sugeridos para hombres">
+              <span class="muestra-color" style="background-color: #c7a274;" title="Arena / Camel"></span>
+              <span class="muestra-color" style="background-color: #8c7a6b;" title="Topo / Marrón suave"></span>
+              <span class="muestra-color" style="background-color: #5c524a;" title="Café tabaco"></span>
+              <span class="muestra-color" style="background-color: #4f5552;" title="Gris pizarra"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="caja-lluvia-sobres">
+          <p class="titulo-lluvia">Lluvia de sobres</p>
+          <div style="font-size: 30px; line-height: 1;" aria-hidden="true">✉️</div>
+          <p class="texto-lluvia">
+            Tu presencia es nuestro mejor regalo, contamos con tu compañía 🤍
+          </p>
+        </div>
+      </section>
+      
+      <!-- Sección Galería con Zoom y descripción -->
+      <section style="margin-top: 28px; padding-top: 22px; border-top: 1px solid #dcd4c6;">
+        <p class="subtitulo" style="margin-bottom: 4px;">Nuestros Momentos</p>
+        <p style="font-size: 13px; color: #666; margin-bottom: 8px;"></p>
+
+        <div class="galeria-grid">  
+          <div class="item-foto">
+            <img src="./img/Foto7.jpeg" alt="Foto 7" onclick="abrirZoom(this.src, this.alt, 'Nuestra primer foto')">
+            <p class="pie-foto">Nuestra primer foto</p>
+          </div>
+
+          <div class="item-foto">
+            <img src="./img/Foto1.jpeg" alt="Foto 1" onclick="abrirZoom(this.src, this.alt, '¡El día que le pedí su mano!')">
+            <p class="pie-foto">¡El día que le pedí su mano!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Confirmación de Asistencia -->
+      <section id="seccion-confirmacion" style="margin-top: 28px; padding-top: 22px; border-top: 1px solid #dcd4c6;">
+        <p class="subtitulo" style="margin-bottom: 6px;">Confirmar Asistencia</p>
+
+        <!-- Aviso cuando faltan 5 días o menos (la boda aún no pasa) -->
+        <div id="avisoPocosDiasRsvp" class="aviso-cierre-rsvp">
+          El plazo para confirmar asistencia ha finalizado (faltan 5 días o menos para la boda).
+        </div>
+
+        <!-- Aviso cuando la fecha de la boda ya pasó -->
+        <div id="avisoBodaPasadaRsvp" class="aviso-cierre-rsvp">
+          Nuestra boda ya se celebró, por lo que el formulario de confirmación ya no está disponible.
+        </div>
+
+        <a id="enlaceAbrirFormulario" href="#confirmar-asistencia" onclick="alternarFormularioBoda(event)" style="
+          display: inline-block;
+          color: #2f5d46;
+          font-size: 14px;
+          text-decoration: underline;
+          margin-bottom: 10px;
+          cursor: pointer;">
+          Abrir formulario de confirmación
+        </a>
+
+        <div id="contenedorFormularioBoda" style="display: none;">
+          <form id="formConfirmacion" class="form-boda" onsubmit="enviarConfirmacion(event)">
+            <div class="campo-boda">
+              <label for="nombreInvitado">Nombre del invitado *</label>
+              <input type="text" id="nombreInvitado" name="nombre" required placeholder="Ej. Laura Gómez">
+            </div>
+
+            <div class="campo-boda">
+              <label for="asisteInvitado">¿Asistes? *</label>
+              <select id="asisteInvitado" name="asiste" required onchange="ajustarCuposPorAsistencia()">
+                <option value="">Selecciona una opción</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="campo-boda">
+              <label for="cuposInvitado">Cupos *</label>
+              <input type="number" id="cuposInvitado" name="cupos" min="1" max="5" value="1" required oninput="validarCuposEnVivo()">
+            </div>
+
+            <div class="campo-boda">
+              <label for="mensajeInvitado">Mensaje (Opcional)</label>
+              <textarea id="mensajeInvitado" name="mensaje" rows="3" placeholder="Escribe un mensaje o dedicatoria..."></textarea>
+            </div>
+
+            <button type="submit" id="btnEnviarConfirmacion" class="btn-enviar-boda">
+              Enviar confirmación
+            </button>
+
+            <p id="estadoConfirmacion" class="estado-envio"></p>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <!-- Reproductor de música -->
+    <audio id="audioBoda" src="./CancionBoda.mp3" autoplay loop preload="auto"></audio>
+      <button id="btnAudio" class="btn-musica" onclick="alternarMusica()">
+        <span id="iconoAudio">▶</span>
+        <span id="textoAudio">Escuchar nuestra canción</span>
+      </button>
+
+    <!-- Pie de página con tono verde más oscuro -->
+    <footer id="pie-creador" class="pie-creador">
+      <p>
+        Invitación web diseñada y desarrollada por
+      </p>
+      <p>
+        <strong>Datos & Servicios</strong>.
+      </p>
+      <p>
+        ¿Deseas una invitación o desarrollo web a medida? Escríbeme a
+      </p>
+      <p style="margin-top: 4px;">
+        Contacto: <a href="mailto:feroca77@gmail.com">feroca77@gmail.com</a>
+        <!-- <a href="https://github.com/LuisDataS" target="_blank" rel="noopener">github.com/LuisDataS</a> -->
+      </p>
+        WhatsApp: +57 321 3059574
+      </p>
+    </footer>
+  </main>
+
+  <!-- Botón flotante para bajar y ver más contenido -->
+  <button type="button" id="btnBajarFlotante" class="btn-bajar-flotante" onclick="bajarContenido()" aria-label="Ver más contenido abajo">
+    <span>Sigue bajando</span>
+    <span>↓</span>
+  </button>
+
+  <!-- Visor ampliado (toca en cualquier lugar para cerrar) -->
+  <div id="visorZoom" class="visor-zoom" onclick="cerrarZoom()">
+    <div class="visor-contenido">
+      <img id="imagenZoom" src="" alt="">
+      <p id="descripcionZoom" class="visor-descripcion"></p>
+    </div>
+  </div>
+
+  <script>
+    // Ajusta aquí la fecha y hora exacta de tu boda (AAAA-MM-DDTHH:MM:SS)
+    const FECHA_BODA = "2026-12-19T15:00:00";
+    const DIAS_LIMITE_CONFIRMACION = 10;
+    let confirmacionesCerradas = false;
+
+    function calcularTiempoRestante() {
+      const ahora = new Date();
+      const objetivo = new Date(FECHA_BODA);
+      const diferenciaMs = objetivo - ahora;
+      const msPorDia = 1000 * 60 * 60 * 24;
+      const diasCalendario = Math.ceil(diferenciaMs / msPorDia);
+
+      if (diferenciaMs <= 0) {
+        return {
+          finalizado: true,
+          diasCalendario,
+          dias: 0,
+          horas: 0,
+          minutos: 0
+        };
+      }
+
+      const totalMinutos = Math.floor(diferenciaMs / (1000 * 60));
+      const dias = Math.floor(totalMinutos / (60 * 24));
+      const horas = Math.floor((totalMinutos % (60 * 24)) / 60);
+      const minutos = totalMinutos % 60;
+
+      return {
+        finalizado: false,
+        diasCalendario,
+        dias,
+        horas,
+        minutos
+      };
+    }
+
+    
+    function actualizarContadorYPlazo() {
+      const info = calcularTiempoRestante();
+      const diasEl = document.getElementById("diasBoda");
+      const horasEl = document.getElementById("horasBoda");
+      const minutosEl = document.getElementById("minutosBoda");
+      const txtEl = document.getElementById("textoDiasBoda");
+
+      const enlaceForm = document.getElementById("enlaceAbrirFormulario");
+      const contForm = document.getElementById("contenedorFormularioBoda");
+      const btnEnviar = document.getElementById("btnEnviarConfirmacion");
+      const avisoPocosDias = document.getElementById("avisoPocosDiasRsvp");
+      const avisoBodaPasada = document.getElementById("avisoBodaPasadaRsvp");
+
+      if (diasEl && horasEl && minutosEl && txtEl) {
+        if (info.finalizado) {
+          diasEl.textContent = "0";
+          horasEl.textContent = "0";
+          minutosEl.textContent = "0";
+          txtEl.textContent = "Nuestra boda ya se celebró";
+        } else {
+          diasEl.textContent = String(info.dias);
+          horasEl.textContent = String(info.horas).padStart(2, "0");
+          minutosEl.textContent = String(info.minutos).padStart(2, "0");
+          txtEl.textContent = "para nuestra boda";
+        }
+      }
+
+      if (avisoPocosDias) avisoPocosDias.style.display = "none";
+      if (avisoBodaPasada) avisoBodaPasada.style.display = "none";
+
+      if (info.finalizado || info.diasCalendario <= DIAS_LIMITE_CONFIRMACION) {
+        confirmacionesCerradas = true;
+        if (enlaceForm) enlaceForm.style.display = "none";
+        if (contForm) contForm.style.display = "none";
+        if (btnEnviar) btnEnviar.disabled = true;
+
+        if (info.finalizado || info.diasCalendario < 0) {
+          if (avisoBodaPasada) avisoBodaPasada.style.display = "block";
+        } else {
+          if (avisoPocosDias) avisoPocosDias.style.display = "block";
+        }
+      }
+    }
+
+    function bajarContenido() {
+      window.scrollBy({
+        top: Math.round(window.innerHeight * 0.75),
+        behavior: "smooth"
+      });
+    }
+
+    function actualizarBotonFlotante() {
+      const btn = document.getElementById("btnBajarFlotante");
+      if (!btn) return;
+      const cercaDelFinal = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 90);
+      if (cercaDelFinal) {
+        btn.classList.add("oculto");
+      } else {
+        btn.classList.remove("oculto");
+      }
+    }
+
+const audio = document.getElementById("audioBoda");
+    const icono = document.getElementById("iconoAudio");
+    const texto = document.getElementById("textoAudio");
+    let pausadoManualmente = false;
+
+    function marcarReproduciendo() {
+      if (icono) icono.textContent = "❚❚";
+      if (texto) texto.textContent = "Pausar música";
+    }
+
+    function marcarPausado(textoBoton = "Reanudar música") {
+      if (icono) icono.textContent = "▶";
+      if (texto) texto.textContent = textoBoton;
+    }
+
+    function intentarAutoplayMusica() {
+      if (!audio || pausadoManualmente) return;
+
+      audio.play().then(() => {
+        marcarReproduciendo();
+      }).catch(() => {
+        // Muchos celulares y navegadores bloquean el sonido automático sin interacción previa.
+        // Dejamos listo el primer toque/clic en la página para iniciar en silencio elegante o al interactuar.
+        marcarPausado("Escuchar nuestra canción");
+      });
+    }
+
+    function alternarMusica() {
+      if (!audio) return;
+
+      if (audio.paused) {
+        pausadoManualmente = false;
+        audio.play().then(() => {
+          marcarReproduciendo();
+        }).catch(() => {
+          marcarPausado("Toca de nuevo para sonar");
+        });
+      } else {
+        pausadoManualmente = true;
+        audio.pause();
+        marcarPausado("Reanudar música");
+      }
+    }
+
+    // Si el navegador bloqueó el autoplay al cargar, al primer clic o toque en la página intenta sonar
+    function activarEnPrimeraInteraccion() {
+      if (!audio || pausadoManualmente || !audio.paused) return;
+      audio.play().then(() => {
+        marcarReproduciendo();
+      }).catch(() => {});
+    }
+
+    document.addEventListener("click", activarEnPrimeraInteraccion, { once: true });
+    document.addEventListener("touchstart", activarEnPrimeraInteraccion, { once: true, passive: true });
+    window.addEventListener("DOMContentLoaded", intentarAutoplayMusica);
+
+    function alternarMapaBoda(evento) {
+      if (evento) evento.preventDefault();
+      const contenedor = document.getElementById("contenedorMapaBoda");
+      const enlace = document.getElementById("enlaceVerMapa");
+      if (!contenedor || !enlace) return;
+
+      const estaOculto = contenedor.style.display === "none";
+      contenedor.style.display = estaOculto ? "block" : "none";
+      enlace.textContent = estaOculto ? "Ocultar mapa" : "Ver mapa interactivo";
+    }
+
+    function abrirZoom(src, alt, descripcion) {
+      const visor = document.getElementById("visorZoom");
+      const img = document.getElementById("imagenZoom");
+      const desc = document.getElementById("descripcionZoom");
+      if (!visor || !img) return;
+      img.src = src;
+      img.alt = alt || "Foto ampliada";
+      if (desc) {
+        desc.textContent = descripcion || "";
+      }
+      visor.classList.add("activo");
+    }
+
+    function cerrarZoom() {
+      const visor = document.getElementById("visorZoom");
+      if (!visor) return;
+      visor.classList.remove("activo");
+    }
+
+    const URL_SCRIPT_CONFIRMACION = "https://script.google.com/macros/s/AKfycbxeDpmq7mo5p_txAuzmMphRx7Lq0ixLTnHuMpvrs8Up-Cz5Mo-4PA7T9rIL6blEvK2O/exec";
+
+    async function enviarConfirmacion(evento) {
+      evento.preventDefault();
+      const form = document.getElementById("formConfirmacion");
+      const btn = document.getElementById("btnEnviarConfirmacion");
+      const estado = document.getElementById("estadoConfirmacion");
+      const infoActual = calcularTiempoRestante();
+
+      if (confirmacionesCerradas || infoActual.finalizado || infoActual.diasCalendario <= DIAS_LIMITE_CONFIRMACION) {
+        confirmacionesCerradas = true;
+        actualizarContadorYPlazo();
+        if (estado) {
+          estado.style.color = "#9e2a2b";
+          estado.textContent = "Ya no se permiten más confirmaciones (faltan 5 días o menos para la boda).";
+        }
+        return;
+      }
+
+      const payload = {
+        nombre: document.getElementById("nombreInvitado").value.trim(),
+        asiste: document.getElementById("asisteInvitado").value.trim(),
+        cupos: document.getElementById("cuposInvitado").value.trim(),
+        mensaje: document.getElementById("mensajeInvitado").value.trim()
+      };
+
+      if (payload.asiste === "No") {
+        payload.cupos = "0";
+      }
+
+      if (payload.asiste === "Sí" && (!payload.cupos || Number(payload.cupos) < 1)) {
+        estado.style.color = "#9e2a2b";
+        estado.textContent = "Si confirmas asistencia, el número de cupos debe ser de 1 o más.";
+        document.getElementById("cuposInvitado").focus();
+        return;
+      }
+
+      if (!payload.nombre || !payload.asiste) {
+        estado.style.color = "#9e2a2b";
+        estado.textContent = "Por favor completa tu nombre y si asistes.";
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
+      estado.style.color = "#555";
+      estado.textContent = "Guardando tu confirmación...";
+
+      try {
+        await fetch(URL_SCRIPT_CONFIRMACION, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+
+        estado.style.color = "#2f5d46";
+        estado.textContent = "¡Listo! Tu confirmación quedó registrada.";
+        form.reset();
+        document.getElementById("cuposInvitado").value = "1";
+        ajustarCuposPorAsistencia();
+      } catch (err) {
+        estado.style.color = "#9e2a2b";
+        estado.textContent = "Hubo un problema al enviar. Intenta de nuevo.";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Enviar confirmación";
+      }
+    }
+
+    function alternarFormularioBoda(evento) {
+      if (evento) evento.preventDefault();
+      const infoActual = calcularTiempoRestante();
+      if (confirmacionesCerradas || infoActual.finalizado || infoActual.diasCalendario <= DIAS_LIMITE_CONFIRMACION) {
+        actualizarContadorYPlazo();
+        return;
+      }
+      const contenedor = document.getElementById("contenedorFormularioBoda");
+      const enlace = document.getElementById("enlaceAbrirFormulario");
+      if (!contenedor || !enlace) return;
+
+      const estaOculto = contenedor.style.display === "none";
+      contenedor.style.display = estaOculto ? "block" : "none";
+      enlace.textContent = estaOculto ? "Ocultar formulario" : "Abrir formulario de confirmación";
+    }
+
+    function ajustarCuposPorAsistencia() {
+      const asiste = document.getElementById("asisteInvitado");
+      const cupos = document.getElementById("cuposInvitado");
+      const estado = document.getElementById("estadoConfirmacion");
+      if (!asiste || !cupos) return;
+
+      if (asiste.value === "No") {
+        cupos.value = "0";
+        cupos.min = "0";
+        cupos.readOnly = true;
+        cupos.disabled = true;
+        cupos.style.backgroundColor = "#ece8df";
+        cupos.style.cursor = "not-allowed";
+        if (estado) {
+          estado.style.color = "#555";
+          estado.textContent = "";
+        }
+      } else {
+        cupos.disabled = false;
+        cupos.readOnly = false;
+        cupos.min = "1";
+        if (Number(cupos.value) < 1) {
+          cupos.value = "1";
+        }
+        cupos.style.backgroundColor = "#ffffff";
+        cupos.style.cursor = "text";
+      }
+    }
+
+    function validarCuposEnVivo() {
+      const asiste = document.getElementById("asisteInvitado");
+      const cupos = document.getElementById("cuposInvitado");
+      const estado = document.getElementById("estadoConfirmacion");
+      if (!asiste || !cupos) return;
+
+      if (asiste.value === "No") {
+        cupos.value = "0";
+        return;
+      }
+
+      if (asiste.value === "Sí") {
+        if (cupos.value !== "" && Number(cupos.value) <= 0) {
+          cupos.value = "1";
+          if (estado) {
+            estado.style.color = "#9e2a2b";
+            estado.textContent = "Si asistes, debes indicar al menos 1 cupo.";
+          }
+        }
+      }
+    }
+
+    window.addEventListener("scroll", actualizarBotonFlotante, { passive: true });
+    actualizarContadorYPlazo();
+    actualizarBotonFlotante();
+    setInterval(actualizarContadorYPlazo, 60000);
+  </script>
+
+</body>
+</html>
